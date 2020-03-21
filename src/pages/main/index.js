@@ -6,7 +6,6 @@ import { Switch, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import { withStyles } from '@material-ui/core'
 import Header from './header'
-
 import { HOME, CHOOSE_PIZZA_FLAVOURS } from 'routes'
 
 const ChoosePizzaSize = lazy(() => import('../choose-pizza-size'))

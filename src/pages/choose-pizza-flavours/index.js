@@ -1,9 +1,15 @@
 import React from 'react'
+import styled from 'styled-components'
 import t from 'prop-types'
-import { Grid } from '@material-ui/core'
-import { H3 } from 'ui'
+import {
+  Grid,
+  Card
+} from '@material-ui/core'
+import { H3, PizzasGrid } from 'ui'
 import { singularOrPlural } from 'utils'
 import { Redirect } from 'react-router-dom'
+
+import pizzaFlavours from 'fake-data/pizza-flavours'
 import { HOME } from 'routes'
 
 const ChoosePizzaFlavours = ({ location }) => {
@@ -22,7 +28,20 @@ const ChoosePizzaFlavours = ({ location }) => {
           Escolha {flavours} {singularOrPlural(flavours, 'sabor', 'sabores')}:
         </H3>
 
+        <PizzasGrid>
+          {pizzaFlavours.map((flavour) => {
+            return (
+              <Grid item key={flavour.id} xs>
+                <Card>
+                  {console.log(flavour)}
+                </Card>
+              </Grid>
+            )
+          })}
+        </PizzasGrid>
+
       </Grid>
+      <Img alt='heheh' src='/public/fake-data/images/bacon.svg' />
     </>
   )
 }
@@ -30,5 +49,10 @@ const ChoosePizzaFlavours = ({ location }) => {
 ChoosePizzaFlavours.propTypes = {
   location: t.object.isRequired
 }
+
+const Img = styled.img`
+  width: 50px;
+  height: 50px; 
+`
 
 export default ChoosePizzaFlavours

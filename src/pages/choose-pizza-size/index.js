@@ -8,7 +8,11 @@ import {
   Typography,
   Grid
 } from '@material-ui/core'
-import { H3, H4 } from 'ui'
+import {
+  H3,
+  H4,
+  PizzasGrid
+} from 'ui'
 import { singularOrPlural } from 'utils'
 import { AuthContext } from '../../contexts/auth'
 import pizzaSizes from '../../fake-data/pizzas-sizes'
@@ -59,13 +63,6 @@ const ChoosePizzaSize = () => {
     </>
   )
 }
-
-const PizzasGrid = styled(Grid).attrs({
-  container: true,
-  spacing: 2
-})`
-  padding: 20px;
-`
 
 const CardActionArea = styled(MaterialCardActionArea).attrs({
   component: Link
