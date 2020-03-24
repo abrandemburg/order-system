@@ -64,8 +64,8 @@ const ChoosePizzaSize = () => {
 }
 
 const Pizza = styled.div`
-  border: 1px solid #ccc;
-  background: #fff;
+  border: 1px solid ${({ theme }) => theme.palette.grey.A100};
+  background: ${({ theme }) => theme.palette.common.white};
   align-items: center;
   border-radius: 50%;
   display: flex;
@@ -77,7 +77,7 @@ const Pizza = styled.div`
 
   &::before,
   &::after {
-    background: #ccc;
+    background: ${({ theme }) => theme.palette.grey.A100};
     content: '';
     position: absolute;
     transform: rotate(45deg)
@@ -98,7 +98,7 @@ const PizzaSize = styled(Typography).attrs({
   variant: 'h5'
 })`
   align-items: center;
-  background: #fff;
+  background: ${({ theme }) => theme.palette.common.white};
   border-radius: 50%;
   display: flex;
   height: 80px;
