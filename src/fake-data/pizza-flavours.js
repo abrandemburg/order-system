@@ -1,19 +1,7 @@
 export default [
   {
-    id: 0,
-    image: '/fake-data/images/azeitona.svg',
-    name: 'Azeitona',
-    price: {
-      0: 12,
-      1: 20,
-      2: 40,
-      3: 60
-    }
-  },
-
-  {
     id: 1,
-    image: '../../../public/fake-data/images/bacon.svg',
+    image: '/fake-data/images/bacon.svg',
     name: 'Bacon',
     price: {
       0: 14,
@@ -25,7 +13,7 @@ export default [
 
   {
     id: 2,
-    image: '../../../public/fake-data/images/calabresa.svg',
+    image: '/fake-data/images/calabresa.svg',
     name: 'Calabresa',
     price: {
       0: 12,
@@ -37,7 +25,7 @@ export default [
 
   {
     id: 3,
-    image: '../../../public/fake-data/images/camarao.svg',
+    image: '/fake-data/images/camarao.svg',
     name: 'Camarão',
     price: {
       0: 18,
@@ -49,7 +37,7 @@ export default [
 
   {
     id: 4,
-    image: '../../../public/fake-data/images/marguerita.svg',
+    image: '/fake-data/images/marguerita.svg',
     name: 'Marguerita',
     price: {
       0: 12,
@@ -61,7 +49,7 @@ export default [
 
   {
     id: 5,
-    image: '../../../public/fake-data/images/champignon.svg',
+    image: '/fake-data/images/champignon.svg',
     name: 'champignon',
     price: {
       0: 15,
