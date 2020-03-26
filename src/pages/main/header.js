@@ -1,5 +1,6 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import {
   AppBar as MaterialAppBar,
   Toolbar as MaterialToolbar,
@@ -10,11 +11,12 @@ import {
 } from '@material-ui/core'
 import { AccountCircle } from '@material-ui/icons'
 import { ReactComponent as MainLogo } from '../../images/pizza-facil.svg'
-import { AuthContext } from '../../contexts/auth'
+import { useAuth } from 'hooks'
+import { HOME } from 'routes'
 
 const Header = () => {
   const [anchorElement, setAnchorElement] = useState(null)
-  const { userInfo, logout } = useContext(AuthContext)
+  const { userInfo, logout } = useAuth()
 
   const handleOpenMenu = (e) => {
     setAnchorElement(e.target)
@@ -28,7 +30,9 @@ const Header = () => {
     <AppBar>
       <Toolbar>
         <LogoContainer>
-          <Logo />
+          <Link to={HOME}>
+            <Logo />
+          </Link>
         </LogoContainer>
 
         <Typography>

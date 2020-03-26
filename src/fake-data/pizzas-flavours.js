@@ -1,6 +1,6 @@
 export default [
   {
-    id: 1,
+    id: '0',
     image: '/fake-data/images/bacon.svg',
     name: 'Bacon',
     price: {
@@ -12,7 +12,7 @@ export default [
   },
 
   {
-    id: 2,
+    id: '2',
     image: '/fake-data/images/calabresa.svg',
     name: 'Calabresa',
     price: {
@@ -24,7 +24,7 @@ export default [
   },
 
   {
-    id: 3,
+    id: '3',
     image: '/fake-data/images/camarao.svg',
     name: 'Camarão',
     price: {
@@ -36,7 +36,7 @@ export default [
   },
 
   {
-    id: 4,
+    id: '4',
     image: '/fake-data/images/marguerita.svg',
     name: 'Marguerita',
     price: {
@@ -48,9 +48,9 @@ export default [
   },
 
   {
-    id: 5,
+    id: '5',
     image: '/fake-data/images/champignon.svg',
-    name: 'champignon',
+    name: 'Champignon',
     price: {
       0: 15,
       1: 23,

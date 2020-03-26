@@ -8,18 +8,22 @@ import {
 } from '@material-ui/core'
 import {
   CardLink,
+  Content,
   H3,
   PizzasGrid,
-  Divider
+  Divider,
+  Footer
 } from 'ui'
-import { singularOrPlural, checkboxesChecked } from 'utils'
+import {
+  singularOrPlural,
+  toMoney
+} from 'utils'
 import { Redirect } from 'react-router-dom'
-import pizzaFlavours from 'fake-data/pizza-flavours'
-import { HOME } from 'routes'
+import pizzasFlavours from 'fake-data/pizzas-flavours'
+import { HOME, CHOOSE_PIZZA_QUANTITY } from 'routes'
 
 const ChoosePizzaFlavours = ({ location }) => {
   const [checkboxes, setCheckBoxes] = useState(() => ({}))
-  console.log('checkboxes', checkboxes)
 
   if (!location.state) {
     return <Redirect to={HOME} />
@@ -27,11 +31,12 @@ const ChoosePizzaFlavours = ({ location }) => {
 
   console.log('location', location)
 
-  const { flavours, id } = location.state
+  const { flavours, id } = location.state.pizzaSize
 
   const handleChangeCheckbox = (flavourId) => (e) => {
     console.log('checkboxes', checkboxes)
     console.log('target', e.target.checked)
+    console.log('target', e.target)
 
     if (
       checkboxesChecked(checkboxes).length === flavours &&
@@ -50,42 +55,73 @@ const ChoosePizzaFlavours = ({ location }) => {
 
   return (
     <>
-      <Grid container direction='column' alignItems='center'>
+      <Content>
+        <Grid container direction='column' alignItems='center'>
 
-        <H3 variant='h5'>
-          Escolha {flavours} {singularOrPlural(flavours, 'sabor', 'sabores')}:
-        </H3>
+          <H3 variant='h5'>
+            Escolha {flavours} {singularOrPlural(flavours, 'sabor', 'sabores')}:
+          </H3>
 
-        <PizzasGrid>
-          {pizzaFlavours.map((flavour) => {
-            return (
-              <Grid item key={flavour.id} xs>
-                <Card checked={!!checkboxes[flavour.id]}>
-                  <FlavourLabel>
-                    <Checkbox
-                      checked={!!checkboxes[flavour.id]}
-                      onChange={handleChangeCheckbox(flavour.id)}
-                    />
-                    <Img alt='heheh' src={flavour.image} />
+          <PizzasGrid>
+            {pizzasFlavours.map((flavour) => {
+              return (
+                <Grid item key={flavour.id} xs>
+                  <Card checked={!!checkboxes[flavour.id]}>
+                    <FlavourLabel>
+                      <Checkbox
+                        checked={!!checkboxes[flavour.id]}
+                        onChange={handleChangeCheckbox(flavour.id)}
+                      />
+                      <Img alt='heheh' src={flavour.image} />
 
-                    <Divider />
+                      <Divider />
 
-                    <Typography>
-                      {flavour.name}
-                    </Typography>
-                    <Typography>
-                      {`R$: ${flavour.price[id]},00`}
-                    </Typography>
-                  </FlavourLabel>
-                </Card>
-              </Grid>
-            )
-          })}
-        </PizzasGrid>
-
-      </Grid>
+                      <Typography>
+                        {flavour.name}
+                      </Typography>
+                      <Typography>
+                        {`${toMoney(flavour.price[id])}`}
+                      </Typography>
+                    </FlavourLabel>
+                  </Card>
+                </Grid>
+              )
+            })}
+          </PizzasGrid>
+        </Grid>
+      </Content>
+      <Footer buttons={{
+        back: {
+          children: 'Mudar tamanho'
+        },
+        action: {
+          to: {
+            pathname: CHOOSE_PIZZA_QUANTITY,
+            state: {
+              ...location.state,
+              pizzaFlavours: getFlavourIdAndName(checkboxes)
+            }
+          },
+          children: 'Quantas pizzas?',
+          disabled: checkboxesChecked(checkboxes).length === 0
+        }
+      }}
+      />
     </>
   )
+}
+
+function checkboxesChecked (checkboxes) {
+  return Object.values(checkboxes).filter(c => !!c)
+}
+
+function getFlavourIdAndName (checkboxes) {
+  return Object.entries(checkboxes)
+    .filter(([_, value]) => !!value)
+    .map(([id]) => ({
+      id,
+      name: pizzasFlavours.find((flavour) => flavour.id === id).name
+    }))
 }
 
 ChoosePizzaFlavours.propTypes = {
