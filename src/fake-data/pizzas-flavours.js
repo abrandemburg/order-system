@@ -1,6 +1,6 @@
 export default [
   {
-    id: '0',
+    id: '1',
     image: '/fake-data/images/bacon.svg',
     name: 'Bacon',
     price: {

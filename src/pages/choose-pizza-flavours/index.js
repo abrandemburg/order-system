@@ -23,21 +23,15 @@ import pizzasFlavours from 'fake-data/pizzas-flavours'
 import { HOME, CHOOSE_PIZZA_QUANTITY } from 'routes'
 
 const ChoosePizzaFlavours = ({ location }) => {
-  const [checkboxes, setCheckBoxes] = useState(() => ({}))
+  const [checkboxes, setCheckBoxes] = useState(() => [])
 
   if (!location.state) {
     return <Redirect to={HOME} />
   }
 
-  console.log('location', location)
-
   const { flavours, id } = location.state.pizzaSize
 
   const handleChangeCheckbox = (flavourId) => (e) => {
-    console.log('checkboxes', checkboxes)
-    console.log('target', e.target.checked)
-    console.log('target', e.target)
-
     if (
       checkboxesChecked(checkboxes).length === flavours &&
       e.target.checked === true
@@ -103,7 +97,7 @@ const ChoosePizzaFlavours = ({ location }) => {
             }
           },
           children: 'Quantas pizzas?',
-          disabled: checkboxesChecked(checkboxes).length === 0
+          disabled: checkboxes.length === 0
         }
       }}
       />
@@ -111,8 +105,12 @@ const ChoosePizzaFlavours = ({ location }) => {
   )
 }
 
+ChoosePizzaFlavours.propTypes = {
+  location: t.object.isRequired
+}
+
 function checkboxesChecked (checkboxes) {
-  return Object.values(checkboxes).filter(c => !!c)
+  return Object.values(checkboxes).filter(Boolean)
 }
 
 function getFlavourIdAndName (checkboxes) {
@@ -122,10 +120,6 @@ function getFlavourIdAndName (checkboxes) {
       id,
       name: pizzasFlavours.find((flavour) => flavour.id === id).name
     }))
-}
-
-ChoosePizzaFlavours.propTypes = {
-  location: t.object.isRequired
 }
 
 const Card = styled(MaterialCard)`
